@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <header id="header" class="header">
+      <div class="logo">
+        <a href="index.html"><img src="images/logoipsum-317.svg" alt="logo" /></a>
+      </div>
+      <button class="circle-icon"><i class="fa fa-shopping-basket icon" aria-hidden="true"></i></button>
+    </header>
+
+    <main class="page-container">
+      <div id="categories" class="categories"></div>
+
+      <div class="tootevalik">
+        <h2>Browse our products</h2>
+        <div id="product-list" class="product-list"></div>
+      </div>
+
+      <div class="ostukorv">
+        <h2>Shopping cart</h2>
+        <div id="cart-items" class="cart-items"></div>
+        <button id="empty-cart" class="secondary-btn">Empty cart</button>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <p>LOQO © All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>
