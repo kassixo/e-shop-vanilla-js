@@ -1,4 +1,5 @@
 import { getProductById } from "./api.js";
+import { addToCart } from "./cart.js";
 
 export async function loadProductView(id) {
   const product = await getProductById(id); // fetch toode by ID
@@ -16,12 +17,15 @@ export async function loadProductView(id) {
         `;
 
   // sündmus lisa ostukorvi (veel ei tööta)
-  document.getElementById(`add-to-cart-${product.id}`).onclick = () => addToCart(product);
+  //   document.getElementById(`add-to-cart-${product.id}`).onclick = () => addToCart(product);
+
+  document.getElementById(`add-to-cart-${product.id}`).onclick = () => {
+    addToCart(product);
+  };
 
   document.getElementById("product-list-container").style.display = "none";
   document.getElementById("product-page").style.display = "block";
   document.getElementById("cart-container").style.display = "none";
 
   console.log("Tootele vajutamine töötab?");
-  console.log(product);
 }

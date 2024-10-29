@@ -20,7 +20,7 @@ async function displayCatBtns() {
     const catBtn = document.createElement("button");
     catBtn.classList.add("cat-btn");
     catBtn.textContent = category;
-    catBtn.onclick = () => displayProducts(category); // siia teha funktsioon kat view
+    catBtn.onclick = () => displayProducts(category);
     categoryDiv.appendChild(catBtn);
   });
 }
@@ -74,6 +74,7 @@ export async function displayProducts(category = null) {
     addToCartButton.onclick = () => addToCart(product.title);
     addToCartButton.onclick = (e) => {
       e.stopPropagation(); // Vältida, et tootekaardile klikkimine navigeeriks tootevaatesse, kui vajutatakse "Lisa ostukorvi" nuppu
+      console.log("Toode " + product.title + "on lisatud ostukorvi."); //confirm
       addToCart(product);
     };
     productContentDiv.appendChild(addToCartButton);
@@ -82,4 +83,8 @@ export async function displayProducts(category = null) {
     productDiv.appendChild(productContentDiv);
     productList.appendChild(productDiv); // main
   });
+
+  document.getElementById("product-list-container").style.display = "block";
+  document.getElementById("product-page").style.display = "none";
+  document.getElementById("cart-container").style.display = "none";
 }

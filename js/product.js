@@ -1,7 +1,8 @@
 // class
 
 export class Product {
-  constructor(title, price, count, image, category, description) {
+  constructor(id, title, price, count, image, category, description) {
+    this.id = id;
     this.title = title;
     this.price = price;
     this.count = count;

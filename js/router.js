@@ -5,24 +5,10 @@ import { loadCartView } from "./cartView.js";
 // funktsioon, mis vastutab vaadete vahel liikumise eest
 export const navigate = (view, param) => {
   const views = {
-    category: () => displayProducts(param || "all"), // kõikide toodete vaade
+    category: () => displayProducts(param), // kõikide toodete vaade
     product: () => loadProductView(param), // üksiku toote vaade, tooteleht
     cart: () => loadCartView(), // ostukorvi vaade
   };
-
-  // const views = {
-  //   category: () => {
-  //     document.getElementById("product-list-container").style.display = "block";
-  //     document.getElementById("cart-container").style.display = "none";
-  //     displayProducts(param || "all");
-  //   }, // kõikide toodete vaade
-  //   // product: () => loadProductView(param), // üksiku toote vaade, tooteleht
-  //   cart: () => {
-  //     document.getElementById("product-list-container").style.display = "none";
-  //     document.getElementById("cart-container").style.display = "block";
-  //     loadCartView();
-  //   }, // ostukorvi vaade
-  // };
 
   // vali ja käivita sobiv vaade
   if (views[view]) {

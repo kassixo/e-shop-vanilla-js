@@ -7,7 +7,7 @@ export class Inventory {
 
     // esialgne laoseis
     this.products.forEach((product) => {
-      this.originalStock[product.title] = product.count;
+      this.originalStock[product.id] = product.count;
     });
   }
 
@@ -17,37 +17,38 @@ export class Inventory {
   }
 
   // kontrollin laoseisu
-  checkStock(productTitle, count) {
-    const product = this.products.find((p) => p.title === productTitle);
+  checkStock(productId, count) {
+    const product = this.products.find((p) => p.id === productId);
     return product && product.count >= count;
   }
 
   // vähendan laoseisu, kui toode lisatakse ostukorvi
-  reduceStock(productTitle, count) {
-    const product = this.products.find((p) => p.title === productTitle);
+  reduceStock(productId, count) {
+    const product = this.products.find((p) => p.id === productId);
     if (product && product.count >= count) {
       product.count -= count;
     }
   }
 
   // kindla toote laoseis
-  getStock(productTitle) {
-    const product = this.products.find((p) => p.title === productTitle);
+  getStock(productId) {
+    const product = this.products.find((p) => p.id === productId);
     return product ? product.count : 0;
   }
 
   // toote laoseisu taastamine, kui toode eemaldatakse ostukorvist
-  restoreStock(productTitle, count) {
-    const product = this.products.find((p) => p.title === productTitle);
+  restoreStock(productId, count) {
+    const product = this.products.find((p) => p.id === productId);
     if (product) {
-      product.count += count;
+      //   product.count += count;
+      product.count = Math.min(product.count + count, this.originalStock[product.id]);
     }
   }
 
   // taasta kõik algsesse seisu
   resetStock() {
     this.products.forEach((product) => {
-      product.count = this.originalStock[product.title];
+      product.count = this.originalStock[product.id];
     });
   }
 }
