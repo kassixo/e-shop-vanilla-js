@@ -1,0 +1,240 @@
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0;
+    padding: 0;
+}
+
+$primary-color: #1d4da7;
+$black2: #283841;
+$gray-color: #e4e4e4;
+
+body {
+    background-color: #f5f5f5;
+    // padding: 0px 64px;
+    /* width: 1000px; */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    height: 80px;
+    padding: 0px 80px;
+}
+
+.logo img{
+    width: 100px;
+    height: auto;
+}
+
+.circle-icon {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    background-color: $black2;
+    color: $black2;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon {
+    color: #fff;
+}
+
+.page-container {
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.categories {
+    display: flex;
+    gap:8px;
+    margin-bottom: 24px;
+}
+
+.categories button {
+    background-color: #fff;
+    border: 1px solid $gray-color;
+    text-transform: capitalize;
+    padding: 8px 16px;
+}
+
+input {
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+h4, h5 {
+    font-weight: 600;
+}
+
+h3 {
+    font-size:24px;
+    font-weight: 700;
+}
+
+/* h4 {
+    font-size: 20px;
+} */
+
+.tootevalik {
+    margin-top:40px;
+    color: #111;
+}
+
+h2 {
+    margin-bottom:24px;
+}
+
+#empty-cart {
+    margin-top: 24px;
+}
+
+.product-list {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 40px;
+}
+
+button {
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+    // padding: 12px 24px;
+    font-weight: 600;
+}
+
+.product-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    padding: 24px;
+    background-color: white;
+    gap: 16px;
+    border: 1px solid #e4e4e4;
+}
+
+.product-container:hover {
+    border: 1px solid #c4c4c4;
+}
+
+.product-container .primary-btn {
+    background-color: $primary-color;
+    color: #ffffff;
+    width: 100%;
+    padding: 12px 24px;
+}
+
+.product-container .secondary-btn {
+    background-color: #eee;
+    border: none;
+    color: $black2;
+    width: 100%;
+    padding: 12px 24px;
+}
+
+.product-image {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.product-title {
+    font-size:16px;
+    font-weight: 600;
+    color: $black2;
+}
+
+.product-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: $black2;
+}
+
+.product-content-div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: none;
+    width: 100%;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    padding: 12px 24px;
+}
+
+.disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+}
+
+.remove-btn {
+    padding: 2px 8px;
+    height: 24px;
+    border-radius:4px;
+    background-color: #fc7979;
+    color: #fff;
+}
+
+.ostukorv {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e4e4e4;
+}
+
+.ostukorv {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e4e4e4;
+}
+
+.ostukorv h2 {
+    margin-bottom: 24px;
+}
+
+.cart-item {
+    display: flex;
+    gap: 8px;
+    color: $black2;
+    font-weight: 600;
+    margin: auto;
+}
+
+#footer {
+    background-color: $black2;
+    color: #fff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
