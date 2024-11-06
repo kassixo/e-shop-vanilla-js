@@ -1,0 +1,68 @@
+// category buttons
+
+.categories {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cat-btn {
+  background-color: #fff;
+  color: $primary-color;
+  border-radius: 8px;
+  text-transform: capitalize;
+  padding: 8px 16px;
+}
+
+.cat-btn.active {
+  background-color: $primary-color;
+  color: #fff;
+}
+
+button {
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.primary-btn {
+  background-color: transparent;
+  border-radius: 999px;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+  padding: 12px 24px;
+}
+
+.primary-btn:hover {
+  background-color: $primary-color;
+  color: #ffffff;
+  padding: 12px 24px;
+}
+
+// .secondary-btn {
+//     background-color: #eee;
+//     border: none;
+//     color: $black2;
+//     padding: 12px 24px;
+// }
+
+// .secondary-btn {
+//     background-color: transparent;
+//     border: 1px solid $primary-color;
+//     color: $primary-color;
+//     padding: 12px 24px;
+// }
+
+//remove from cart
+.remove-btn {
+  padding: 0px 6px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: $primary-color;
+  color: #fff;
+  line-height: 0px; // et ikoon oleks ilusti keskel
+}

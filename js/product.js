@@ -1,13 +1,13 @@
 // class
 
 export class Product {
-  constructor(id, title, price, count, image, category, description) {
+  // konstruktoris järjekord oluline
+  constructor(id, title, price, description, image) {
     this.id = id;
     this.title = title;
     this.price = price;
-    this.count = count;
+    this.count = 1;
     this.image = image;
-    this.category = category;
     this.description = description;
   }
 

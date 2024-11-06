@@ -1,0 +1,50 @@
+// footer
+
+#footer {
+  background-color: $primary-color;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // padding: 0px 64px;
+  color: $page-background;
+}
+
+.footer-content {
+  max-width: 1440px;
+  box-sizing: border-box;
+  padding: 0px 24px;
+  margin: 40px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.nav-ul {
+  list-style: none;
+}
+
+.nav-ul li {
+  margin-bottom: 8px;
+}
+
+.nav-ul li a {
+  text-decoration: none;
+  color: $page-background;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  font-size: 14px;
+}

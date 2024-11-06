@@ -1,0 +1,102 @@
+// ostukorvi ikoon päises
+
+.circle-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: $price;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: none; /* Hidden by default */
+}
+
+.circle-icon {
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.icon {
+  color: #fff;
+}
+
+// ostukorvi container
+.ostukorv {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  max-width: 1440px;
+}
+
+// ostukorvis olev toote rida
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 8px 0px;
+  align-items: center;
+  border-bottom: 1px solid $gray-color;
+}
+
+.cart-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-right: 16px;
+  width: 100%;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+.cart-item-product-title {
+  width: 80%;
+}
+
+.cart-item-product-price {
+  width: 10%;
+}
+
+// toote koguse input
+input {
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid $gray-color;
+  text-align: center;
+  font-size: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+//Ostukorvi pealkirja alla ruumi
+.ostukorv h2 {
+  margin-bottom: 24px;
+}
+
+//ostukorvis olevate toodete ja total price vahele ruumi
+.cart-total {
+  margin-top: 24px;
+}
+
+//empty cart ja totali vahele ruumi
+#empty-cart {
+  margin-top: 24px;
+}

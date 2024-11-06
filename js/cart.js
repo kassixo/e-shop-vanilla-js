@@ -1,33 +1,57 @@
-import { Inventory } from "./inventory.js";
+import { inventory } from "./index.js";
 
 let items = [];
-const inventory = new Inventory(items);
-export default inventory;
 
 export function getCart() {
   return items;
 }
 
-export function addToCart(product) {
-  const existingItem = items.find((item) => item.product.id === product.id);
-
-  if (existingItem) {
-    existingItem.count += 1;
+// ostukorvi numbri ikoon
+const updateCartCount = () => {
+  const count = getCartItemCount();
+  const cartCountElement = document.getElementById("cart-count");
+  if (count > 0) {
+    cartCountElement.style.display = "inline";
+    cartCountElement.textContent = count;
   } else {
-    items.push({ product, count: 1 });
+    cartCountElement.style.display = "none";
   }
+};
+
+// numbri ikoon on alguses 0
+export function getCartItemCount() {
+  return items.reduce((total, item) => total + item.count, 0);
+}
+
+// lisa ostukorvi
+export function addToCart(product) {
+  if (inventory.checkStock(product.id)) {
+    const existingItem = items.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      existingItem.count += 1;
+    } else {
+      items.push({ ...product, count: 1 });
+    }
+    inventory.reduceStock(product.id);
+  } else {
+    alert("Product is not in stock!");
+  }
+
+  // uuenda ostukorvis olevate toodete kogust kohe peale toote ostukorvi lisamist
+  updateCartCount();
 }
 
 function getTotal() {
   let total = 0;
   items.forEach((item) => {
-    const price = item.product.price;
-    const count = item.count;
+    const price = item.price;
+    const count = item.count ?? 1;
 
     if (!isNaN(price) && !isNaN(count)) {
       total += price * count;
     } else {
-      console.error(`Invalid price or count for item: ${item.product.title}`, { price, count });
+      console.error(`Invalid price or count for item: ${item.title}`, { price, count });
     }
   });
   return total;
@@ -35,92 +59,101 @@ function getTotal() {
 
 export function updateCartDisplay() {
   const cartItems = document.getElementById("cart-items");
-  cartItems.innerHTML = ""; // Clear any existing items in the cart
+  cartItems.innerHTML = "";
+
+  // kontrolli kas ostukorv on tühi
+  if (items.length === 0) {
+    cartItems.innerHTML = "<p>No items in cart</p>";
+    return; // lõpeta edasine kood kui ostukorv on tühi
+  }
 
   items.forEach((item, index) => {
     const cartItemDiv = document.createElement("div");
     cartItemDiv.classList.add("cart-item");
-    cartItemDiv.innerHTML = `<p>${item.product.title}</p>`;
 
-    // Create cart count INPUT
+    // toote detailid
+    const cartItemDetailsDiv = document.createElement("div");
+    cartItemDetailsDiv.classList.add("cart-item-details");
+    cartItemDetailsDiv.innerHTML = `
+      <div class="cart-item-product-title"><p>${item.title}</p></div>
+      <div class="cart-item-product-price"><p>${item.price.toFixed(2)}€</p></div>`;
+
+    // input
     const countInput = document.createElement("input");
     countInput.type = "number";
     countInput.id = `cart-item-quantity-${index}`;
-    countInput.value = item.count >= 1 ? item.count : 1; // Set initial count with a fallback
+    countInput.value = item.count >= 1 ? item.count : 1; // fallback
     countInput.min = 1;
-    countInput.max = item.product.count || 1;
-    countInput.onchange = (event) => updateCartQuantity(item.product.id, event.target.value);
+    countInput.max = item.count || 1;
+    countInput.onchange = (event) => updateCartQuantity(item.id, event.target.value);
 
-    // Create cart delete item button
+    cartItemDetailsDiv.appendChild(countInput);
+
+    // kustuta toode nupp
+    const cartItemRemoveDiv = document.createElement("div");
+    cartItemRemoveDiv.classList.add("cart-item-remove");
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-btn");
-    removeButton.textContent = "X";
-    removeButton.onclick = () => removeFromCart(item.product.title);
+    removeButton.innerHTML = "Remove";
+    removeButton.onclick = () => removeFromCart(item);
 
-    // Append input and button to cart item div
-    cartItemDiv.appendChild(countInput);
-    cartItemDiv.appendChild(removeButton);
+    // appends
+    cartItemRemoveDiv.appendChild(removeButton);
+    cartItemDiv.appendChild(cartItemDetailsDiv);
+    cartItemDiv.appendChild(cartItemRemoveDiv);
 
-    // Append cartItemDiv to the cart container
     cartItems.appendChild(cartItemDiv);
   });
 
-  // Create a new div for the total price and set its class
+  // total price div
   const totalDiv = document.createElement("div");
   totalDiv.classList.add("cart-total");
 
-  // Calculate total and display it in the totalDiv
+  // totali arvutamine
   const total = getTotal();
   if (isNaN(total)) {
-    totalDiv.innerHTML = `<h3>Total price: 0.00€</h3>`;
+    totalDiv.innerHTML = `<div class="product-price">Total price: 0.00€</div>`;
     console.error("Invalid total amount:", total);
   } else {
-    totalDiv.innerHTML = `<h3>Total price: ${total.toFixed(2)}€</h3>`;
+    totalDiv.innerHTML = `<div class="product-price">Total price: ${total.toFixed(2)}€</div>`;
   }
 
-  // Append the totalDiv to the cart container
   cartItems.appendChild(totalDiv);
 }
 
 // uuenda toote kogust ostukorvis
 export function updateCartQuantity(productId, newCount) {
-  // const product = inventory.getProducts().find((p) => p.title === productTitle);
-  console.log("Product ID:", productId);
-  // const availableStock = inventory.getStock(productId);
-  // console.log("Available Stock:", availableStock);
   newCount = parseInt(newCount);
 
-  // // kontrollib, kas sisestatud number ületab laojäägi vms
-  // if (newCount > availableStock) {
-  //   alert(`Only ${availableStock} available in stock.`);
-  //   return;
-  // }
+  // uuenda ainult siis kui newCount on number suurem kui 0
+  if (isNaN(newCount) || newCount < 1) return;
 
   // uuenda toote kogust ostukorvis
   items.forEach((item) => {
-    if (item.product.id === productId) {
+    if (item.id === productId) {
       item.count = newCount;
     }
   });
 
   updateCartDisplay(); //uus laoseis
+  updateCartCount(); // uus cart count number
 }
 
 //eemalda üksik toode ostukorvist
-export function removeFromCart(encodedTitle) {
-  const productTitle = decodeURIComponent(encodedTitle);
-  items = items.filter((item) => item.product.title !== productTitle);
-  inventory.resetStock(); // taasta laoseis
-  updateCartDisplay();
+export function removeFromCart(product) {
+  items = items.filter((item) => item.id !== product.id);
+  inventory.restoreStock(product.id, product.count); // taasta laoseis
+  updateCartCount();
+  updateCartDisplay(); // uus cart count number
 }
 
 // tühjenda ostukorv
 document.getElementById("empty-cart").onclick = () => {
   items.forEach((item) => {
     // taasta laoseis
-    inventory.restoreStock(item.product.title, item.count);
+    inventory.restoreStock(item.id, item.count);
   });
   items = [];
-  inventory.resetStock();
   updateCartDisplay();
+  updateCartCount(); // uus cart count number
 };

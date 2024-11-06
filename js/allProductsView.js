@@ -1,6 +1,7 @@
 import { getProducts, getCategories } from "./api.js";
 import { navigate } from "./router.js";
 import { addToCart } from "./cart.js";
+import { Product } from "./product.js";
 
 // KATEGOORIA NUPUD
 
@@ -8,19 +9,33 @@ async function displayCatBtns() {
   const categories = await getCategories();
   const categoryDiv = document.getElementById("categories");
 
-  // Add an "All" button to show all products
+  // lisab active staatuse nupule, kui vajutatud
+  function setActiveButton(clickedButton) {
+    const buttons = document.querySelectorAll(".cat-btn");
+    buttons.forEach((button) => button.classList.remove("active")); // eemalda teistelt
+    clickedButton.classList.add("active"); //lisa sellele, mida vajutati
+  }
+
+  // KÕIK nupp
   const allBtn = document.createElement("button");
   allBtn.classList.add("cat-btn");
   allBtn.textContent = "All";
-  allBtn.onclick = () => displayProducts(); // kuva kõik (dpProducts parameeter eemaldatud!!)
+  allBtn.onclick = () => {
+    setActiveButton(allBtn); // "All" nupp active
+    navigate("category"); // näita kõiki tooteid
+  };
+  setActiveButton(allBtn); // teeb all buttoni kohe lehe laadides aktiiveks
   categoryDiv.appendChild(allBtn);
 
   categories.forEach((category) => {
-    // lisa ostukorvi nupp
+    // lisa kategooria nupud
     const catBtn = document.createElement("button");
     catBtn.classList.add("cat-btn");
     catBtn.textContent = category;
-    catBtn.onclick = () => displayProducts(category);
+    catBtn.onclick = () => {
+      setActiveButton(catBtn); // valitud kategooria nupp aktiivne
+      navigate("category", category); // filtreeri kategooria kaupa
+    };
     categoryDiv.appendChild(catBtn);
   });
 }
@@ -28,7 +43,7 @@ async function displayCatBtns() {
 displayCatBtns();
 
 // KÕIKIDE TOODETE ALA
-export async function displayProducts(category = null) {
+export async function displayProducts(category) {
   const products = await getProducts();
 
   // filtreeri kategooriale vastavalt
@@ -38,10 +53,12 @@ export async function displayProducts(category = null) {
   const productList = document.getElementById("product-list");
   productList.innerHTML = "";
 
-  filteredProducts.forEach((product) => {
+  // impordib producti konstruktori
+  filteredProducts.forEach((productData) => {
+    const product = new Product(productData.id, productData.title, productData.price, productData.description, productData.image);
     // tootekaardi container
     const productDiv = document.createElement("div");
-    productDiv.classList.add("product-container");
+    productDiv.classList.add("product-card");
     productDiv.onclick = () => navigate("product", product.id);
 
     // toote pildid

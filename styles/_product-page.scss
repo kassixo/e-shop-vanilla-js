@@ -1,0 +1,47 @@
+// PRODUCT PAGE
+.product-page-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  min-height: 560px;
+}
+
+.product-page-image {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-page-card img {
+  width: 100%;
+  height: auto;
+}
+.product-page-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 80px;
+  gap: 16px;
+  width: 50%;
+}
+
+.product-desc {
+  color: #666666;
+  font-size: 16px;
+  line-height: 26px;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.product-content-div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: none;
+  width: 100%;
+}

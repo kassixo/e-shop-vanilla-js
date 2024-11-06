@@ -7,17 +7,16 @@ export async function loadProductView(id) {
   const productPage = document.getElementById("product-page");
 
   productPage.innerHTML = `
-            <div class="product-container">
-            <img src="${product.image}" alt="${product.title}">
-            <h3>${product.title}</h3>
-            <p>${product.description}</p>
-            <p>${product.price}€</p>
-            <button id="add-to-cart-${product.id}" class="primary-btn">Lisa ostukorvi</button>
+            <div class="product-page-card">
+            <div class="product-page-image"><img src="${product.image}" alt="${product.title}"></div>
+            <div class="product-page-details">
+            <div class="product-title"><h3>${product.title}</h3></div>
+            <div class="product-desc">${product.description}</div>
+            <div class="product-price">${product.price}€</div>
+            <button id="add-to-cart-${product.id}" class="primary-btn">Add to cart</button>
+            </div>
             </div>
         `;
-
-  // sündmus lisa ostukorvi (veel ei tööta)
-  //   document.getElementById(`add-to-cart-${product.id}`).onclick = () => addToCart(product);
 
   document.getElementById(`add-to-cart-${product.id}`).onclick = () => {
     addToCart(product);

@@ -9,30 +9,59 @@
   </head>
   <body>
     <header id="header" class="header">
-      <div id="logo" class="logo">
-        <img src="images/loqo.svg" alt="logo" />
-      </div>
-      <button id="cart-button" class="circle-icon"><i class="fa fa-shopping-basket icon" aria-hidden="true"></i></button>
+      <nav>
+        <div id="logo" class="logo">
+          <img src="images/loqo-dark.svg" alt="logo" />
+        </div>
+        <button id="cart-button" class="circle-icon"><i class="fa fa-shopping-basket icon" aria-hidden="true"></i><span id="cart-count" class="cart-count">0</span></button>
+      </nav>
     </header>
 
     <main class="page-container">
       <div id="product-list-container" class="tootevalik">
+        <div class="banner"><img src="images/sale-banner.png" /></div>
         <h2>Browse our products</h2>
         <div id="categories" class="categories"></div>
         <div id="product-list" class="product-list"></div>
       </div>
 
       <div id="product-page"></div>
-
       <div id="cart-container" class="ostukorv" style="display: none">
         <h2>Shopping cart</h2>
         <div id="cart-items" class="cart-items"></div>
-        <button id="empty-cart" class="secondary-btn">Empty cart</button>
+        <button id="empty-cart" class="primary-btn">Empty cart</button>
       </div>
     </main>
 
     <footer id="footer">
-      <p>LOQO © All Rights Reserved.</p>
+      <div class="footer-content">
+        <div class="footer-logo"><img src="images/loqo-white.svg" alt="logo" /></div>
+        <div class="footer-nav">
+          <h2 class="nav-title">About LOQO</h2>
+          <ul class="nav-ul">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <h2 class="nav-title">Help & Information</h2>
+          <ul class="nav-ul">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Terms and conditions</a></li>
+            <li><a href="#">Customer Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <h2 class="nav-title">Follow on socials</h2>
+          <ul class="nav-ul">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Tiktok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright"><p>LOQO © All Rights Reserved.</p></div>
     </footer>
 
     <script type="module" src="./js/index.js"></script>

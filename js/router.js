@@ -5,17 +5,20 @@ import { loadCartView } from "./cartView.js";
 // funktsioon, mis vastutab vaadete vahel liikumise eest
 export const navigate = (view, param) => {
   const views = {
-    category: () => displayProducts(param), // kõikide toodete vaade
-    product: () => loadProductView(param), // üksiku toote vaade, tooteleht
-    cart: () => loadCartView(), // ostukorvi vaade
+    // kõikide toodete vaade
+    category: () => displayProducts(param),
+    // üksiku toote vaade, tooteleht
+    product: () => loadProductView(param),
+    // ostukorvi vaade
+    cart: () => loadCartView(),
   };
 
   // vali ja käivita sobiv vaade
   if (views[view]) {
     views[view]();
+    const encodedParam = param ? encodeURIComponent(param) : "";
+    const newUrl = view === "category" && !param ? "/" : `/${view}${encodedParam ? `/${encodedParam}` : ""}`;
 
-    // muuda URL'i ilma lehte uuesti laadimata
-    const newUrl = view === "category" ? "/" : `/${view}/${param || ""}`;
     window.history.pushState({}, "", newUrl);
   }
 };
@@ -24,5 +27,6 @@ export const navigate = (view, param) => {
 window.addEventListener("popstate", () => {
   const path = window.location.pathname;
   const [_, view, param] = path.split("/");
-  navigate(view || "category", param);
+  const decodedParam = decodeURIComponent(param);
+  navigate(view || "category", decodedParam);
 });
